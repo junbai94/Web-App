@@ -1,0 +1,38 @@
+{% extends 'daily/base.html' %}
+
+{% load staticfiles %}
+{% load extra_tags %}
+
+{% block title %}Spot Daily{% endblock %}
+
+{% block body_block %}
+<h3>This is the spot price page</h3>
+<p>
+This page should contains a form. One can selects date and spotID then the daily price
+should be selected from database. <br/><br />
+It seems like we can skip DJango's model API and directly access database as we used to do<br />
+<br /> 
+{% if valid %}
+    {% if data.spotID.0 %}
+        {{data.to_html|safe}}<br />
+        <a href="{% url 'spot' %}">Select another</a>
+    {% else %}
+        <strong>No such entry in database</strong><br />
+        <a href="{% url 'spot' %}">Select another</a>
+    {% endif %}
+{% else %}
+    <form action="{% url 'spot' %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div><br />
+    {% endfor %}
+    <input type="submit" value="Submit">
+    </form>
+{% endif %}
+
+</p>
+
+{% endblock %}

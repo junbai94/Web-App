@@ -1,0 +1,48 @@
+{% extends 'daily/base.html' %}
+
+{% load staticfiles %}
+{% load static %}
+
+{% block body_block %}
+
+{% comment %}
+<div>
+<script src="{% static 'js/text_change.js' %}"></script>
+
+<p id="change">testing</p>
+<p> This page is for testing out different ideas</p>
+{% if valid %}
+    {{form.cleaned_data.your_name}}
+{% else %}
+    <form action="{% url 'name' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" />
+    </form>
+{% endif %}
+</div><br />
+
+
+<button type = "button" onclick="myFunction()">Click me</button>
+
+
+<p>Date: <input type="text" id="datepicker"></p>
+{% endcomment %}
+
+<p>this is good</p>
+<br />
+<div>
+<form action = "{% url 'name' %}" method="post">
+    {% csrf_token %}
+    <p>Name: <input type="text" name="name"></p>
+    <p>Date: <input type="text" id="datepicker" name="date"></p>
+    <input type="submit" value="Submit">
+</form>
+{% if date %}
+    <p>The date is {{date}}!</p>
+{% else %}
+    <p><i>Input your name</i></p>
+{% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'daily/base.html' %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+<h3>This page shows a future curve for one perticular day</h3><br />
+{% if valid %}
+    {% if data.instID.0 %}
+        {{data.to_html|safe}}<br />
+        <a href="{% url 'fut' %}">Select another</a>
+    {% else %}
+        <strong>No such entry in database</strong><br />
+        <a href="{% url 'fut' %}">Select another</a>
+    {% endif %}
+{% else %}
+    <form action="{% url 'fut' %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div><br />
+    {% endfor %}
+    <input type="submit" value="Submit">
+    </form>
+{% endif %}
+{% endblock %}

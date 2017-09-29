@@ -1,0 +1,14 @@
+{% extends 'daily/base.html' %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+<h3>This is the homepage</h3>
+<i>all functionality tabs will be listed down here</i>
+<ul>
+<a href="{% url 'spot' %}"><li>Spot Price</li></a>
+<a href="{% url 'fut' %}"><li>Future Curve</li></a>
+<a href="{% url 'name' %}"><li>Get Name</li></a>
+<a href="{% url 'test_upload' %}"><li>Test Uploading</li></a>
+</ul>
+{% endblock %}
